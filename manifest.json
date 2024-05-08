@@ -17,5 +17,5 @@
   "start_url": "https://framellarchive.github.io/LVL1/",
 "theme_color": "#000000",
   "display": "standalone",
-    "fullscreen": "true"
+  "fullscreen": true
 }
