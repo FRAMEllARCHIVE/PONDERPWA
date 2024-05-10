@@ -1,7 +1,7 @@
 {
   "manifest_version": 3, 
   "name": "PONDER",  
-  "short_name": "PONDER",
+  "short_name": "",
   "icons": [
     {
       "src": "icon-192x192.png",
