@@ -6,9 +6,50 @@
     <meta name="description" content="Your PWA Description">
     <link rel="manifest" href="manifest.json">
     <title>PONDER</title>
+<head>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .title {
+            font-size: 133px;
+            font-weight: bold;
+            display: inline-block;
+            background: linear-gradient(45deg, #FFD700, #FFA07A, #87CEFA, #FF69B4, #FFD700); /* Gradient background */
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: animateText 8s linear infinite;
+        }
+
+        @keyframes animateText {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Welcome to Your PWA!</h1>
-    <p>This is a simple Progressive Web App.</p>
+
+<div class="title">
+    <p>PONDER</p>
+</div>
+
 </body>
 </html>
