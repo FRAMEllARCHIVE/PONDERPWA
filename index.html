@@ -28,7 +28,7 @@
             background-clip: text;
             color: transparent;
             animation: animateText 8s linear infinite;
-            cursor: pointer; /* Add cursor pointer to indicate it's clickable */
+            cursor: pointer;
         }
 
         @keyframes animateText {
@@ -43,7 +43,6 @@
             }
         }
 
-        /* Hide the install button by default */
         #installButton {
             display: none;
         }
@@ -58,23 +57,15 @@
 <script>
     let deferredPrompt;
 
-    // Check if the browser supports the beforeinstallprompt event
     if ('serviceWorker' in navigator && 'BeforeInstallPromptEvent' in window) {
-        // Listen for the beforeinstallprompt event
         window.addEventListener('beforeinstallprompt', (event) => {
-            // Store the event for later use
             deferredPrompt = event;
-            // Show the install button
             document.getElementById('installButton').style.display = 'block';
         });
 
-        // Listen for the click event on the install button
         document.getElementById('installButton').addEventListener('click', () => {
-            // If the PWA hasn't been installed yet, prompt the user to add to home screen
             if (deferredPrompt) {
-                // Show the instruction to add to home screen
-                alert('To install this app, please tap the share button below and select "Add to Home Screen".');
-                // Reset the deferredPrompt variable
+                alert('To install PONDER, please tap the share button below and select "Add to Home Screen".');
                 deferredPrompt = null;
             }
         });
