@@ -19,7 +19,7 @@
         }
 
         .title {
-            font-size: 133px;
+            font-size: 188px;
             font-weight: bold;
             display: inline-block;
             background: linear-gradient(45deg, #FFD700, #FFA07A, #87CEFA, #FF69B4, #FFD700);
@@ -28,6 +28,7 @@
             background-clip: text;
             color: transparent;
             animation: animateText 8s linear infinite;
+            letter-spacing: 3px;
             cursor: pointer;
         }
 
@@ -40,6 +41,13 @@
             }
             100% {
                 background-position: 0% 50%;
+            }
+        }
+
+        /* Media Query for Mobile Devices */
+        @media screen and (max-width: 768px) {
+            .title {
+                font-size: 12vw;
             }
         }
     </style>
