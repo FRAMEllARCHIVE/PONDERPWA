@@ -16,6 +16,6 @@
   ],
   "start_url": "https://framellarchive.github.io/IFRAME/",
 "theme_color": "#000000",
-  "display": "standalone",
+  "display": "fullscreen",
     "fullscreen": true
 }
