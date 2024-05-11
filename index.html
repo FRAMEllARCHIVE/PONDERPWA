@@ -90,7 +90,7 @@
     } else if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
         document.getElementById('installButton').innerHTML = 'To install PONDER, use the share button below to "Add to Home Screen"';
         document.getElementById('installButton').addEventListener('click', () => {
-            alert('To install PONDER, press the SHARE button below to "Add to Home Screen"');
+            alert('To install PONDER, press the share button below to "Add to Home Screen"');
         });
     }
 
@@ -109,12 +109,15 @@
         funMessage.style.zIndex = '9999';
         document.body.appendChild(funMessage);
 
-        setTimeout(() => {
-            document.body.removeChild(funMessage);
-            window.close();
-        }, 3000);
+        window.addEventListener('appinstalled', () => {
+            setTimeout(() => {
+                document.body.removeChild(funMessage);
+                window.close();
+            }, 3000);
+        });
     }
 </script>
+
 
 
 </body>
