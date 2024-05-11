@@ -78,6 +78,7 @@
                 deferredPrompt.userChoice.then((choiceResult) => {
                     if (choiceResult.outcome === 'accepted') {
                         console.log('User accepted the install prompt');
+                        showFunMessage();
                     } else {
                         console.log('User dismissed the install prompt');
                     }
@@ -89,10 +90,32 @@
     } else if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
         document.getElementById('installButton').innerHTML = 'To install PONDER, use the share button below to "Add to Home Screen"';
         document.getElementById('installButton').addEventListener('click', () => {
-            alert('To install PONDER, press the share button below to "Add to Home Screen"');
+            alert('To install PONDER, press the SHARE button below to "Add to Home Screen"');
         });
     }
+
+    function showFunMessage() {
+        const funMessage = document.createElement('div');
+        funMessage.textContent = 'HAVE FUN!';
+        funMessage.style.position = 'fixed';
+        funMessage.style.top = '50%';
+        funMessage.style.left = '50%';
+        funMessage.style.transform = 'translate(-50%, -50%)';
+        funMessage.style.fontSize = '30px';
+        funMessage.style.color = 'white';
+        funMessage.style.backgroundColor = 'black';
+        funMessage.style.padding = '10px';
+        funMessage.style.borderRadius = '5px';
+        funMessage.style.zIndex = '9999';
+        document.body.appendChild(funMessage);
+
+        setTimeout(() => {
+            document.body.removeChild(funMessage);
+            window.close();
+        }, 3000);
+    }
 </script>
+
 
 </body>
 </html>
