@@ -70,80 +70,6 @@
 </div>
 
 <script>
-    let deferredPrompt;
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="PONDER" content="ANOTHER WORLD">
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" href="favicon.png">
-    <title>PONDER</title>
-    <style>
-
-@font-face {
-  font-family: 'Game Boy';
-  src: url('gameboy.woff2') format('woff2');
-}
-        
-        body {
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-            background-color: black;
-            color: white;
-            font-family: 'Game Boy';
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-        }
-
-        .title {
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-            font-size: 188px;
-            font-weight: bold;
-            display: inline-block;
-            background: linear-gradient(45deg, #FFD700, #FFA07A, #87CEFA, #FF69B4, #FFD700);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: animateText 8s linear infinite;
-            letter-spacing: 3px;
-            cursor: pointer;
-        }
-
-        @keyframes animateText {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        @media screen and (max-width: 768px) {
-            .title {
-                font-size: 12vw;
-            }
-        }
-    </style>
-</head>
-<body>
-
-<div class="title" id="installButton">
-    <p>PONDER</p>
-</div>
-
-<script>
 let deferredPrompt;
 
 if ('serviceWorker' in navigator && 'BeforeInstallPromptEvent' in window) {
@@ -156,57 +82,6 @@ if ('serviceWorker' in navigator && 'BeforeInstallPromptEvent' in window) {
     deferredPrompt = event;
     document.getElementById('installButton').style.display = 'block';
   });
-
-        document.getElementById('installButton').addEventListener('click', () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        console.log('User accepted the install prompt');
-                        showFunMessage();
-                    } else {
-                        console.log('User dismissed the install prompt');
-                    }
-                    deferredPrompt = null;
-                    document.getElementById('installButton').style.display = 'none';
-                });
-            }
-        });
-    } else if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
-        document.getElementById('installButton').innerHTML = 'To install PONDER, use the share button below to "Add to Home Screen"';
-        document.getElementById('installButton').addEventListener('click', () => {
-            alert('To install PONDER, press the share button below to "Add to Home Screen"');
-        });
-    }
-
-    function showFunMessage() {
-        const funMessage = document.createElement('div');
-        funMessage.textContent = 'HAVE FUN!';
-        funMessage.style.position = 'fixed';
-        funMessage.style.top = '50%';
-        funMessage.style.left = '50%';
-        funMessage.style.transform = 'translate(-50%, -50%)';
-        funMessage.style.fontSize = '30px';
-        funMessage.style.color = 'white';
-        funMessage.style.backgroundColor = 'black';
-        funMessage.style.padding = '10px';
-        funMessage.style.borderRadius = '5px';
-        funMessage.style.zIndex = '9999';
-        document.body.appendChild(funMessage);
-
-        window.addEventListener('appinstalled', () => {
-            setTimeout(() => {
-                document.body.removeChild(funMessage);
-                window.close();
-            }, 8888);
-        });
-    }
-</script>
-
-
-
-</body>
-</html>
 
         document.getElementById('installButton').addEventListener('click', () => {
             if (deferredPrompt) {
