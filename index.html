@@ -142,10 +142,19 @@ function checkDeviceOrientationSupport() {
             document.getElementById('infoIcon').addEventListener('click', () => {
                 const modal = document.createElement('div');
                 modal.classList.add('modal');
-                modal.innerHTML = `
-                    <h2>Installation Instructions</h2>
-                    <p>If the installation hasn't started automatically then your device requires you to manually add this page to your home screen for it to install.</p>
-                    <button>Close</button>`;
+                if (!window.matchMedia('(display-mode: standalone)').matches) {
+                    // App is not installed
+                    modal.innerHTML = `
+                        <h2>Installation Instructions</h2>
+                        <p>If the installation hasn't started automatically then your device requires you to manually add this page to your home screen for it to install.</p>
+                        <button>Close</button>`;
+                } else {
+                    // App is installed
+                    modal.innerHTML = `
+                        <h2>App Installed</h2>
+                        <p>PONDER is installed on your home screen, HAVE FUN!!!</p>
+                        <button>Close</button>`;
+                }
                 
                 document.body.appendChild(modal);
                 modal.querySelector('button').addEventListener('click', () => {
