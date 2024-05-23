@@ -108,79 +108,50 @@
 <div class="info-icon" id="infoIcon">ⓘ</div>
 
 <script>
-    let deferredPrompt;
+let deferredPrompt;
 
-    if ('serviceWorker' in navigator && 'BeforeInstallPromptEvent' in window) {
-        window.addEventListener('beforeinstallprompt', (event) => {
-            deferredPrompt = event;
-            document.getElementById('installButton').style.display = 'block';
-        });
+if ('serviceWorker' in navigator && 'BeforeInstallPromptEvent' in window) {
+    window.addEventListener('beforeinstallprompt', (event) => {
+        deferredPrompt = event;
+        document.getElementById('installButton').style.display = 'block';
+    });
 
-        document.getElementById('installButton').addEventListener('click', () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        console.log('User accepted the install prompt');
-                    } else {
-                        console.log('User dismissed the install prompt');
-                    }
-                    deferredPrompt = null;
-                    document.getElementById('installButton').style.display = 'none';
-                });
-            }
-        });
-    }
-
-function checkDeviceOrientationSupport() {
-    window.addEventListener('deviceorientation', handleOrientation);
-    
-    function handleOrientation(event) {
-        window.removeEventListener('deviceorientation', handleOrientation);
-        if (event.alpha || event.beta || event.gamma) {
-            console.log("Device orientation events supported");
-            document.getElementById('infoIcon').addEventListener('click', () => {
-                const modal = document.createElement('div');
-                modal.classList.add('modal');
-                if (!window.matchMedia('(display-mode: standalone)').matches) {
-                    // App is not installed
-                    modal.innerHTML = `
-                        <h2>Installation Instructions</h2>
-                        <p>If the installation hasn't started automatically then your device requires you to manually add this page to your home screen for it to install.</p>
-                        <button>Close</button>`;
+    document.getElementById('installButton').addEventListener('click', () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
                 } else {
-                    // App is installed
-                    modal.innerHTML = `
-                        <h2>App Installed</h2>
-                        <p>PONDER is installed on your home screen, HAVE FUN!!!</p>
-                        <button>Close</button>`;
+                    console.log('User dismissed the install prompt');
                 }
-                
-                document.body.appendChild(modal);
-                modal.querySelector('button').addEventListener('click', () => {
-                    document.body.removeChild(modal);
-                });
-            });
-        } else {
-            console.log("Device orientation events not supported on this device");
-            document.getElementById('infoIcon').addEventListener('click', () => {
-                const modal = document.createElement('div');
-                modal.classList.add('modal');
-                modal.innerHTML = `
-                    <h2>Important Information</h2>
-                    <p>PONDER is only designed for mobile devices that support tilt.</p>
-                    <button>Close</button>`;
-                
-                document.body.appendChild(modal);
-                modal.querySelector('button').addEventListener('click', () => {
-                    document.body.removeChild(modal);
-                });
+                deferredPrompt = null;
             });
         }
-    }
+    });
 }
 
-checkDeviceOrientationSupport();
+document.getElementById('infoIcon').addEventListener('click', () => {
+    const modal = document.createElement('div');
+    modal.classList.add('modal');
+    if (!window.matchMedia('(display-mode: standalone)').matches) {
+        modal.innerHTML = `
+            <h2>Installation Instructions</h2>
+            <p>If the installation hasn't started automatically then your device requires you to manually add this page to your home screen for it to install.</p>
+            <button>Close</button>`;
+    } else {
+        modal.innerHTML = `
+            <h2>App Installed</h2>
+            <p>PONDER is installed on your home screen, HAVE FUN!!!</p>
+            <button>Close</button>`;
+    }
+    
+    document.body.appendChild(modal);
+    modal.querySelector('button').addEventListener('click', () => {
+        document.body.removeChild(modal);
+    });
+});
+
 
 </script>
 
