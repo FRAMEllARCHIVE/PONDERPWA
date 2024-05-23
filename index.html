@@ -115,21 +115,7 @@
             document.getElementById('installButton').style.display = 'block';
         });
 
-    document.getElementById('installButton').addEventListener('click', () => {
-        if (!checkDeviceOrientationSupport()) {
-            const modal = document.createElement('div');
-            modal.classList.add('modal');
-            modal.innerHTML = `
-                <h2>Important Information</h2>
-                <p>PONDER requires tilt functionality and is only designed for mobile devices.</p>
-                <button>Close</button>`;
-            
-            document.body.appendChild(modal);
-            modal.querySelector('button').addEventListener('click', () => {
-                document.body.removeChild(modal);
-            });
-            return;
-        }
+        document.getElementById('installButton').addEventListener('click', () => {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 deferredPrompt.userChoice.then((choiceResult) => {
