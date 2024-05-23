@@ -109,6 +109,7 @@
 
 <script>
 let deferredPrompt;
+let pwaInstallInteraction = false;
 
 if ('serviceWorker' in navigator && 'BeforeInstallPromptEvent' in window) {
     window.addEventListener('beforeinstallprompt', (event) => {
@@ -121,7 +122,7 @@ if ('serviceWorker' in navigator && 'BeforeInstallPromptEvent' in window) {
             deferredPrompt.prompt();
             deferredPrompt.userChoice.then((choiceResult) => {
                 if (choiceResult.outcome === 'accepted') {
-                    console.log('User accepted the install prompt');
+                pwaInstallInteraction = true;
                 } else {
                     console.log('User dismissed the install prompt');
                 }
@@ -134,7 +135,7 @@ if ('serviceWorker' in navigator && 'BeforeInstallPromptEvent' in window) {
 document.getElementById('infoIcon').addEventListener('click', () => {
     const modal = document.createElement('div');
     modal.classList.add('modal');
-    if (!window.matchMedia('(display-mode: standalone)').matches) {
+    if (pwaInstallInteraction === false) {
         modal.innerHTML = `
             <h2>Installation</h2>
             <p>Add this page to your device's home screen.</p>
