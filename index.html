@@ -131,39 +131,41 @@
         });
     }
 
-    function checkDeviceOrientationSupport() {
-        if (!('DeviceOrientationEvent' in window)) {
-            document.getElementById('infoIcon').addEventListener('click', () => {
-                const modal = document.createElement('div');
-                modal.classList.add('modal');
-                modal.innerHTML = `
-                    <h2>Important Information</h2>
-                    <p>PONDER requires tilt functionality and is only designed for mobile devices.</p>
-                    <button>Close</button>`;
-                
-                document.body.appendChild(modal);
-                modal.querySelector('button').addEventListener('click', () => {
-                    document.body.removeChild(modal);
-                });
+function checkDeviceOrientationSupport() {
+    if (!('DeviceOrientationEvent' in window)) {
+        console.log("Device orientation events not supported");
+        document.getElementById('infoIcon').addEventListener('click', () => {
+            const modal = document.createElement('div');
+            modal.classList.add('modal');
+            modal.innerHTML = `
+                <h2>Important Information</h2>
+                <p>PONDER requires tilt functionality and is only designed for mobile devices.</p>
+                <button>Close</button>`;
+            
+            document.body.appendChild(modal);
+            modal.querySelector('button').addEventListener('click', () => {
+                document.body.removeChild(modal);
             });
-        } else {
-            document.getElementById('infoIcon').addEventListener('click', () => {
-                const modal = document.createElement('div');
-                modal.classList.add('modal');
-                modal.innerHTML = `
-                    <h2>Installation Instructions</h2>
-                    <p>If the installation hasn't started automatically, your device requires you to manually add this page to your home screen for it to install.</p>
-                    <button>Close</button>`;
-                
-                document.body.appendChild(modal);
-                modal.querySelector('button').addEventListener('click', () => {
-                    document.body.removeChild(modal);
-                });
+        });
+    } else {
+        console.log("Device orientation events supported");
+        document.getElementById('infoIcon').addEventListener('click', () => {
+            const modal = document.createElement('div');
+            modal.classList.add('modal');
+            modal.innerHTML = `
+                <h2>Installation Instructions</h2>
+                <p>If the installation hasn't started automatically, your device requires you to manually add this page to your home screen for it to install.</p>
+                <button>Close</button>`;
+            
+            document.body.appendChild(modal);
+            modal.querySelector('button').addEventListener('click', () => {
+                document.body.removeChild(modal);
             });
-        }
+        });
     }
+}
 
-    checkDeviceOrientationSupport();
+checkDeviceOrientationSupport();
 </script>
 
 </body>
