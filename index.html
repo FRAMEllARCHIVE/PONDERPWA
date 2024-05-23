@@ -18,7 +18,8 @@
             -webkit-tap-highlight-color: transparent;
             background-color: black;
             color: white;
-            font-family: 'Game Boy';
+            font-family: 'Game Boy', Arial, sans-serif;
+            font-display: swap;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -143,7 +144,7 @@ function checkDeviceOrientationSupport() {
                 modal.classList.add('modal');
                 modal.innerHTML = `
                     <h2>Installation Instructions</h2>
-                    <p>If the installation hasn't started automatically, your device requires you to manually add this page to your home screen for it to install.</p>
+                    <p>If the installation hasn't started automatically then your device requires you to manually add this page to your home screen for it to install.</p>
                     <button>Close</button>`;
                 
                 document.body.appendChild(modal);
@@ -158,7 +159,7 @@ function checkDeviceOrientationSupport() {
                 modal.classList.add('modal');
                 modal.innerHTML = `
                     <h2>Important Information</h2>
-                    <p>PONDER requires tilt functionality and is only designed for mobile devices.</p>
+                    <p>PONDER is only designed for mobile devices that support tilt.</p>
                     <button>Close</button>`;
                 
                 document.body.appendChild(modal);
