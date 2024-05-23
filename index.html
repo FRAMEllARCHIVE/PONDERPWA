@@ -142,10 +142,11 @@ document.getElementById('infoIcon').addEventListener('click', () => {
             <button>Close</button>`;
     } else {
         modal.innerHTML = `
-      <h2>Installed</h2>
-      <p>PONDER is installed on your home screen</p>
-      <p>HAVE FUN!!!</p>
-      <button>Close</button>`;
+            <h2>Installed</h2>
+            <p>PONDER is installed on your home screen</p>
+            <p>HAVE FUN!!!</p>
+            <button>Close</button>`;
+    }
     
     document.body.appendChild(modal);
     modal.querySelector('button').addEventListener('click', () => {
