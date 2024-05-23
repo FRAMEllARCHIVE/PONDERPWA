@@ -8,25 +8,24 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <title>PONDER</title>
     <style>
-
-@font-face {
-  font-family: 'Game Boy';
-  src: url('gameboy.woff2') format('woff2');
-}
+        @font-face {
+            font-family: 'Game Boy';
+            src: url('gameboy.woff2') format('woff2');
+        }
         
         body {
             user-select: none;
             -webkit-tap-highlight-color: transparent;
             background-color: black;
             color: white;
-            font-family: 'Game Boy', Arial, sans-serif;
-            font-display: swap;
+            font-family: 'Game Boy';
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             overflow: hidden;
+            flex-direction: column;
         }
 
         .title {
@@ -64,37 +63,42 @@
         }
 
         .info-icon {
-  position: relative;
-  margin-left: 10px;
-  cursor: pointer;
-}
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: white;
+        }
 
-.info-icon:hover::after {
-  content: attr(title);
-  position: absolute;
-  background-color: black;
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 12px;
-  z-index: 10;
-  left: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  white-space: nowrap;
-}
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: black;
+            color: white;
+            padding: 20px;
+            border: 1px solid white;
+            border-radius: 5px;
+            z-index: 1000;
+            text-align: center;
+        }
 
-        
+        .modal button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
 <div class="title" id="installButton">
     <p>PONDER</p>
-  <span class="info-icon" title="Installation Instructions">
-      <i class="info-text">ⓘ</i>
-  </span>
 </div>
+<div class="info-icon" id="infoIcon">ⓘ</div>
 
 <script>
     let deferredPrompt;
@@ -110,7 +114,7 @@
                 deferredPrompt.prompt();
                 deferredPrompt.userChoice.then((choiceResult) => {
                     if (choiceResult.outcome === 'accepted') {
-                        showFunMessage();
+                        console.log('User accepted the install prompt');
                     } else {
                         console.log('User dismissed the install prompt');
                     }
@@ -119,55 +123,22 @@
                 });
             }
         });
-    } else if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
-        document.getElementById('installButton').innerHTML = 'To install PONDER, use the share button below to "Add to Home Screen"';
-        document.getElementById('installButton').addEventListener('click', () => {
-            alert('To install PONDER, press the share button below to "Add to Home Screen"');
-        });
     }
 
-    function showFunMessage() {
-        const funMessage = document.createElement('div');
-        funMessage.textContent = 'HAVE FUN!';
-        funMessage.style.position = 'fixed';
-        funMessage.style.top = '50%';
-        funMessage.style.left = '50%';
-        funMessage.style.transform = 'translate(-50%, -50%)';
-        funMessage.style.fontSize = '30px';
-        funMessage.style.color = 'white';
-        funMessage.style.backgroundColor = 'black';
-        funMessage.style.padding = '10px';
-        funMessage.style.borderRadius = '5px';
-        funMessage.style.zIndex = '9999';
-        document.body.appendChild(funMessage);
-
-        window.addEventListener('appinstalled', () => {
-            setTimeout(() => {
-                document.body.removeChild(funMessage);
-                window.close();
-            }, 8888);
+    document.getElementById('infoIcon').addEventListener('click', () => {
+        const modal = document.createElement('div');
+        modal.classList.add('modal');
+        modal.innerHTML = `
+            <h2>Installation Instructions</h2>
+            <p>If the installation hasn't started automatically, your device requires you to manually add this page to your home screen for it to install.</p>
+            <button>Close</button>`;
+        
+        document.body.appendChild(modal);
+        modal.querySelector('button').addEventListener('click', () => {
+            document.body.removeChild(modal);
         });
-    }
-
-    const infoIcon = document.querySelector('.info-icon');
-
-infoIcon.addEventListener('click', () => {
-  const modal = document.createElement('div');
-  modal.classList.add('modal');
-  modal.innerHTML = `
-    <h2>Installation Instructions</h2>
-    <p>If you're not prompted to install PONDER automatically, follow these steps:</p>
-    <button>Close</button>`;
-
-  document.body.appendChild(modal);
-  const closeButton = modal.querySelector('button');
-  closeButton.addEventListener('click', () => {
-    document.body.removeChild(modal);
-  });
-});
+    });
 </script>
-
-
 
 </body>
 </html>
