@@ -62,12 +62,39 @@
                 font-size: 12vw;
             }
         }
+
+        .info-icon {
+  position: relative;
+  margin-left: 10px; /* Adjust spacing as needed */
+  cursor: pointer;
+}
+
+.info-icon:hover::after {
+  content: attr(title);
+  position: absolute;
+  background-color: black;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  z-index: 10;
+  left: 100%; /* Position the tooltip to the right of the icon */
+  top: 50%;
+  transform: translateY(-50%);
+  /* Adjust tooltip positioning as needed */
+  white-space: nowrap; /* Prevent tooltip text wrapping */
+}
+
+        
     </style>
 </head>
 <body>
 
 <div class="title" id="installButton">
     <p>PONDER</p>
+  <span class="info-icon" title="Installation Instructions">
+    <i class="fas fa-info-circle"></i>
+  </span>
 </div>
 
 <script>
