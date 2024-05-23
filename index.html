@@ -136,8 +136,8 @@ document.getElementById('infoIcon').addEventListener('click', () => {
     modal.classList.add('modal');
     if (!window.matchMedia('(display-mode: standalone)').matches) {
         modal.innerHTML = `
-            <h2>Installation Instructions</h2>
-            <p>If the installation hasn't started automatically then your device requires you to manually add this page to your home screen for it to install.</p>
+            <h2>Installation</h2>
+            <p>Add this page to your device's home screen.</p>
             <button>Close</button>`;
     } else {
         modal.innerHTML = `
