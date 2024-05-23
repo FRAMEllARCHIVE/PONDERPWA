@@ -65,7 +65,7 @@
 
         .info-icon {
   position: relative;
-  margin-left: 10px; /* Adjust spacing as needed */
+  margin-left: 10px;
   cursor: pointer;
 }
 
@@ -78,11 +78,10 @@
   border-radius: 5px;
   font-size: 12px;
   z-index: 10;
-  left: 100%; /* Position the tooltip to the right of the icon */
+  left: 100%;
   top: 50%;
   transform: translateY(-50%);
-  /* Adjust tooltip positioning as needed */
-  white-space: nowrap; /* Prevent tooltip text wrapping */
+  white-space: nowrap;
 }
 
         
@@ -153,7 +152,6 @@
     const infoIcon = document.querySelector('.info-icon');
 
 infoIcon.addEventListener('click', () => {
-  // Create a modal element with installation instructions
   const modal = document.createElement('div');
   modal.classList.add('modal');
   modal.innerHTML = `
@@ -161,7 +159,6 @@ infoIcon.addEventListener('click', () => {
     <p>If you're not prompted to install PONDER automatically, follow these steps:</p>
     <button>Close</button>`;
 
-  // Add the modal to the body and handle close button click
   document.body.appendChild(modal);
   const closeButton = modal.querySelector('button');
   closeButton.addEventListener('click', () => {
